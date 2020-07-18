@@ -27,7 +27,7 @@ namespace APIProjectMobile.Repository
             equipmentModel.EquipmentQuantity = equipment.EquipmentQuantity;
             equipmentModel.EquipmentStatus = Status.AVAILABLE;
             equipmentModel.EquipmentIsDelete = IsDelete.ACTIVE;
-            //jnjhbvfvgbh
+            // tést api azure
             _context.TblEquipment.Add(equipmentModel);
             try
             {
