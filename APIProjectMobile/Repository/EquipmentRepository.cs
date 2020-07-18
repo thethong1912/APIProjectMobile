@@ -28,7 +28,7 @@ namespace APIProjectMobile.Repository
             equipmentModel.EquipmentStatus = Status.AVAILABLE;
             equipmentModel.EquipmentIsDelete = IsDelete.ACTIVE;
             // change here
-            _context.TblEquipment.Add(equipmentModel);
+            _context.TblEquipments.Add(equipmentModel);
             try
             {
                 await _context.SaveChangesAsync();
@@ -41,7 +41,7 @@ namespace APIProjectMobile.Repository
 
         public async Task<bool> DeleteEquipment(int id)
         {
-            var equipment = await _context.TblEquipment.FindAsync(id);
+            var equipment = await _context.TblEquipments.FindAsync(id);
             if (equipment == null)
             {
                 return false;
@@ -61,7 +61,7 @@ namespace APIProjectMobile.Repository
 
         public IQueryable<EquipmentInfoVM> GetEquipment(int id)
         {
-            var equipment = _context.TblEquipment
+            var equipment = _context.TblEquipments
                                     .Where(equip => equip.EquipmentId == id && equip.EquipmentIsDelete == IsDelete.ACTIVE)
                                     .Select(eq => new EquipmentInfoVM
                                     {
@@ -76,7 +76,7 @@ namespace APIProjectMobile.Repository
 
         public IQueryable<EquipmentBasicVM> GetListEquipment()
         {
-            var listEquipment = _context.TblEquipment
+            var listEquipment = _context.TblEquipments
                                             .Where(eq => eq.EquipmentIsDelete.Equals(IsDelete.ACTIVE))
                                             .Select(eq => new EquipmentBasicVM
                                             {
@@ -91,7 +91,7 @@ namespace APIProjectMobile.Repository
 
         public IQueryable<EquipmentBasicVM> SearchListEquipment(string eName)
         {
-            var listEquipment = _context.TblEquipment
+            var listEquipment = _context.TblEquipments
                                             .Where(eq => eq.EquipmentName.Contains(eName) && eq.EquipmentIsDelete.Equals(IsDelete.ACTIVE))
                                             .Select(eq => new EquipmentBasicVM
                                             {
@@ -105,7 +105,7 @@ namespace APIProjectMobile.Repository
         }
         public async Task<int> UpdateEquipment(int id, EquipmentInfoVM equipment)
         {
-            TblEquipment equipmentModel = await _context.TblEquipment.FindAsync(id);
+            TblEquipment equipmentModel = await _context.TblEquipments.FindAsync(id);
             if (equipmentModel == null) return -1;
             equipmentModel.EquipmentName = equipment.EquipmentName;
             equipmentModel.EquipmentQuantity = equipment.EquipmentQuantity;
@@ -131,7 +131,7 @@ namespace APIProjectMobile.Repository
 
         private bool EquipmentExists(int id)
         {
-            return _context.TblEquipment.Any(e => e.EquipmentId == id);
+            return _context.TblEquipments.Any(e => e.EquipmentId == id);
         }
 
     }

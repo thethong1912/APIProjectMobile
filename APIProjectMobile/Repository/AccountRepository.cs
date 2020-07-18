@@ -19,12 +19,12 @@ namespace APIProjectMobile.Repository
 
         private bool AccountExists(int id)
         {
-            return _context.TblAccount.Any(record => record.AccId == id);
+            return _context.TblAccounts.Any(record => record.AccId == id);
         }
 
         public IQueryable<LoginVM> CheckLogin(string accountEmail, string password)
         {
-            var loginInfo = _context.TblAccount
+            var loginInfo = _context.TblAccounts
                                 .Where(record => record.AccEmail.Equals(accountEmail) && record.AccPassword.Equals(password) && record.AccIsDelete.Equals(IsDelete.ACTIVE))
                                 .Select(record => new LoginVM
                                 {
@@ -39,7 +39,7 @@ namespace APIProjectMobile.Repository
 
         public IQueryable<ActorBasicInfoVM> GetListActor()
         {
-            var listActor = _context.TblAccount
+            var listActor = _context.TblAccounts
                                     .Where(record => record.AccRole.Equals(Role.USER) && record.AccIsDelete.Equals(IsDelete.ACTIVE))
                                     .Select(record => new ActorBasicInfoVM
                                     {
@@ -53,7 +53,7 @@ namespace APIProjectMobile.Repository
 
         public IQueryable<ActorBasicInfoVM> SearchActor(string accountName)
         {
-            var listActor = _context.TblAccount
+            var listActor = _context.TblAccounts
                                     .Where(record => record.AccName.Contains(accountName) && record.AccRole.Equals(Role.USER) && record.AccIsDelete.Equals(IsDelete.ACTIVE))
                                     .Select(record => new ActorBasicInfoVM
                                     {
@@ -83,7 +83,7 @@ namespace APIProjectMobile.Repository
             accountModel.AccUpdateBy = actor.AccUpdateBy; ;
 
 
-            _context.TblAccount.Add(accountModel);
+            _context.TblAccounts.Add(accountModel);
             try
             {
                 await _context.SaveChangesAsync();
@@ -96,7 +96,7 @@ namespace APIProjectMobile.Repository
 
         public async Task<bool> DeleteActor(int id)
         {
-            var actor = await _context.TblAccount.FindAsync(id);
+            var actor = await _context.TblAccounts.FindAsync(id);
             if (actor == null)
             {
                 return false;
@@ -116,7 +116,7 @@ namespace APIProjectMobile.Repository
 
         public IQueryable<ActorInfoVM> GetActor(int id)
         {
-            var actor = _context.TblAccount
+            var actor = _context.TblAccounts
                                     .Where(record => record.AccId == id && record.AccIsDelete == IsDelete.ACTIVE)
                                     .Select(record => new ActorInfoVM
                                     {
@@ -138,7 +138,7 @@ namespace APIProjectMobile.Repository
 
         public async Task<int> UpdateActor(int id, ActorInfoVM actor)
         {
-            TblAccount account = await _context.TblAccount.FindAsync(id);
+            TblAccount account = await _context.TblAccounts.FindAsync(id);
             if (account == null) return -1;
             account.AccName = actor.AccName;
             account.AccPassword = actor.AccPassword;

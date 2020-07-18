@@ -15,12 +15,12 @@ namespace APIProjectMobile.Models
         {
         }
 
-        public virtual DbSet<TblAccount> TblAccount { get; set; }
-        public virtual DbSet<TblActorRole> TblActorRole { get; set; }
-        public virtual DbSet<TblEquipment> TblEquipment { get; set; }
-        public virtual DbSet<TblEquipmentInScenario> TblEquipmentInScenario { get; set; }
-        public virtual DbSet<TblRoleScenario> TblRoleScenario { get; set; }
-        public virtual DbSet<TblScenario> TblScenario { get; set; }
+        public virtual DbSet<TblAccount> TblAccounts { get; set; }
+        public virtual DbSet<TblActorRole> TblActorRoles { get; set; }
+        public virtual DbSet<TblEquipment> TblEquipments { get; set; }
+        public virtual DbSet<TblEquipmentInScenario> TblEquipmentInScenarios { get; set; }
+        public virtual DbSet<TblRoleScenario> TblRoleScenarios { get; set; }
+        public virtual DbSet<TblScenario> TblScenarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
