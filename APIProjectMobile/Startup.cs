@@ -39,12 +39,12 @@ namespace APIProjectMobile
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             services.AddScoped<IAccountRepository, AccountRepository>();
-            /*services.AddScoped<IScenarioRepository, ScenarioRepository>();
-            services.AddScoped<IEquipmentRepository, EquipmentRepository>();*/
+            services.AddScoped<IScenarioRepository, ScenarioRepository>();
+            services.AddScoped<IEquipmentRepository, EquipmentRepository>();
 
             services.AddScoped<IAccountService, AccountService>();
-            /*services.AddScoped<IScenarioService, ScenarioService>();
-            services.AddScoped<IEquipmentService, EquipmentService>();*/
+            services.AddScoped<IScenarioService, ScenarioService>();
+            services.AddScoped<IEquipmentService, EquipmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
